@@ -1,0 +1,26 @@
+-- CREATE DATABASE IF NOT EXISTS f_web;
+
+-- SHOW DATABASES;
+
+-- USE f_web;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE files (
+    id SERIAL PRIMARY KEY,
+    fileid VARCHAR(255) NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    path VARCHAR(255) NOT NULL,
+    mimetype VARCHAR(50) NOT NULL,
+    size INT NOT NULL,
+    "user" VARCHAR(50) NOT NULL,     
+    uploadDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- DROP TABLE files;
+
+SHOW TABLES;

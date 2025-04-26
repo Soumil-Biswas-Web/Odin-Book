@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model obook_User {
+  id                String             @id @default(cuid())
+  username          String             @unique
+  password          String             @db.VarChar(255)
+  profilePicture    obook_Image?       @relation("UserImage")
+  posts             obook_Post[]       @relation("UserPosts")
+  comments          obook_Comment[]    @relation("UserComments")
+  follows           obook_UserFollow[] @relation("UserToFollows")
+  following         obook_UserFollow[] @relation("FollowToUsers")
+  likedPosts        obook_PostLike[]     
+  likedComments     obook_CommentLike[]  
+}
+
+model obook_UserFollow {
+  id         String                    @id @default(cuid())
+  user       obook_User                @relation("UserToFollows", fields: [userId], references: [id])
+  userId     String
+  follow     obook_User                @relation("FollowToUsers", fields: [followId], references: [id])
+  followId   String
+  @@unique([userId, followId]) // Prevent duplicate contact pairs
+}
+
+model obook_Post {
+  user      obook_User                @relation(fields: [userId], references: [id], name: "UserPosts")
+  userId    String                    @db.VarChar(255)
+  id        String                    @id @default(cuid())
+  text      String                    @db.Text
+  image     obook_Image?              @relation("PostImage")
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt    
+  likes     obook_PostLike[]
+  comments  obook_Comment[]
+}
+
+model obook_Image {
+  id        String                    @id @default(cuid())
+  name      String
+  url       String
+  size      Int
+  publicId  String
+  createdAt DateTime                  @default(now())
+  user      obook_User?               @relation(fields: [userId], references: [id], name: "UserImage")
+  userId    String?                   @unique
+  post      obook_Post?               @relation(fields: [postId], references: [id], name: "PostImage")
+  postId    String?                   @unique
+}
+
+model obook_Comment {
+  id                String            @id @default(cuid())
+  text              String            @db.VarChar(255)
+  post              obook_Post        @relation(fields: [postId], references: [id])
+  postId            String
+  parentComment     obook_Comment?    @relation("Children", fields: [parentCommentId], references: [id])
+  parentCommentId   String?
+  user              obook_User        @relation(fields: [userId], references: [id], name: "UserComments")
+  userId            String            @db.VarChar(255)  
+  likes             obook_CommentLike[]
+  comments          obook_Comment[]   @relation("Children")
+}
+
+model obook_PostLike {
+  user     obook_User  @relation(fields: [userId], references: [id])
+  userId   String
+
+  post     obook_Post  @relation(fields: [postId], references: [id])
+  postId   String
+
+  @@id([userId, postId]) // Composite primary key to prevent duplicates
+}
+
+model obook_CommentLike {
+  user       obook_User    @relation(fields: [userId], references: [id])
+  userId     String
+
+  comment    obook_Comment @relation(fields: [commentId], references: [id])
+  commentId  String
+
+  @@id([userId, commentId]) // Prevent multiple likes from same user
+}
