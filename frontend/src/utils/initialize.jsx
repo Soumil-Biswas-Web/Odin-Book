@@ -4,6 +4,7 @@ import { store } from '../Store/store';
 
 export const initializeApp = async () => {
   const token = localStorage.getItem('token');
+  // console.log("bun bun bun", token)
   if (token) {
     // console.log("token: " + token);
     try {
@@ -13,9 +14,11 @@ export const initializeApp = async () => {
           Authorization: `Bearer ${token}`, 
         },
       });
-      // console.log("user: " + response.data.username);
+
+      const {username, id} = response.data;
+      // console.log("user: ", response.data);
       // Set user and token in Redux
-      store.dispatch(setUser({ user: response.data.username, token }));
+      store.dispatch(setUser({ username, id, token }));
     } catch (error) {
       console.error('Failed to fetch user:', error);
       // Clear invalid token

@@ -1,18 +1,7 @@
 import React from 'react'
-import UserBit from '../../Components/UserBit';
-import axios from 'axios';
-import catchError from '../../../assets/js/catchError';
-import { useLoaderData } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import FollowButton from '../../Components/FollowButton';
+import Followsection from './Followsection';
 
 export default function RightSide() {
-    
-    const data = useLoaderData();
-    console.log(data);
-
-    const user = useSelector((state) => state.userReducer);
-
   return (
     <div className="sm:p-2 lg:p-10 md:w-full max-w-96">
         <div className="hidden md:flex flex-col gap-5">
@@ -26,26 +15,8 @@ export default function RightSide() {
                 <img className="magic-border" src="/1m06z4.jpg" alt="you_cant_if_you_dont.jpg" />
             </div>
 
-            <p className='text-lg'>People you might know</p>
-            {data.map((useritem, index) => {
-                if ((user.username !== null) && (useritem.username == user.username)) return null
-                else return (
-                    <FollowButton user={useritem} key={index}/>
-                )
-            })}
+            <Followsection/>
         </div>  
     </div>
   )
-}
-
-RightSide.loader = async () => {
-    try {              
-        const response = await axios.get(
-          `${import.meta.env.VITE_REACT_SERVER_URL}/user/all`);
-        console.log(response.data);
-        return response.data;
-    } 
-    catch (e) {
-      catchError(e);
-    }    
 }

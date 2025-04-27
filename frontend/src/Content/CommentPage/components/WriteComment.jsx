@@ -34,7 +34,7 @@ export default function WriteComment({post}) {
           Authorization: `Bearer ${token}`, 
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       flash("Post Created successfully");
       navigate("/home");
     } catch (e) {

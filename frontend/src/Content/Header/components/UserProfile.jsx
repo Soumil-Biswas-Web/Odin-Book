@@ -15,7 +15,7 @@ export default function UserProfile() {
 
     const user = useSelector((state) => state.userReducer);
     // const user = feedData[0].user;
-    console.log(user);
+    // console.log(user);
 
     const handleLogout = () => {       
         // Clear token from localStorage
@@ -37,7 +37,7 @@ export default function UserProfile() {
             <Login />
             : 
             <>
-                <UserBit user={user.username}/>
+                <UserBit user={user}/>
                 <button
                     className='button-style'
                     onClick={handleLogout}

@@ -96,7 +96,7 @@ route.post('/login', parseForm, async (req, res) => {
         maxAge: 3 * 24 * 60 * 60 * 1000   // 3 Days
     });
   
-    res.json({ token, username: authenticatedUser.username });
+    res.json({ token, username: authenticatedUser.username, id: authenticatedUser.id});
   } catch (error) {
     console.error('Error Logging in:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });;

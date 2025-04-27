@@ -40,7 +40,7 @@ export default function NewPost() {
           Authorization: `Bearer ${token}`, 
         },
       });
-      console.log(response.data);
+      // console.log(response.data);
       flash("Post Created successfully");
       navigate("/home");
     } catch (e) {

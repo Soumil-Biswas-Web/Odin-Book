@@ -37,6 +37,8 @@ body{
 
 @layer components {
   .button-style {@apply border-2 border-contrast-color bg-background-color font-bold hover:bg-contrast-color rounded-md px-4 py-1 transition-theme hover:text-background-color}
+
+  .fake-button-style {@apply border-2 border-contrast-color bg-background-color font-bold rounded-md px-4 py-1 transition-theme flex items-center justify-center text-center}
 }
 
 .transition-theme{

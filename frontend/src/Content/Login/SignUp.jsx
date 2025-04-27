@@ -40,7 +40,7 @@ export default function SignUp() {
       );
       // localStorage.setItem("token", response.data);
       flash("Created Account successfully");
-      console.log("Created Account successfully");
+      // console.log("Created Account successfully");
       navigate("/login");
     } catch (e) {
       catchError(e);

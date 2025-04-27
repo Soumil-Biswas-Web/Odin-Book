@@ -9,9 +9,9 @@ export default function CommentIcon({isSelected}) {
           "stroke-contrast-color" :
           "stroke-contrast-color-offset"
         }
-        stroke-width="2" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
       />
     </svg>
   )

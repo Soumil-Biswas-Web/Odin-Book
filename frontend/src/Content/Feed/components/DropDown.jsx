@@ -24,7 +24,7 @@ export default function DropDown({post}) {
         {/* Drop down menu for edit / delete post */}
         <button className='' onClick={() => {setDropDown(!dropDown)}}><BsThreeDots /></button>
         {dropDown &&             
-          <div className="flex flex-col p-4 bg-background-color shadow-md shadow-background-color-offset font-semibold">
+          <div className="flex flex-col p-5 gap-3 bg-background-color rounded-lg shadow-inner shadow-background-color-offset font-semibold">
               <Link to={(`editPost/${post.id}`)}>Edit Post</Link>
               <button onClick={() => {apiDeletePost(post)}}>Delete Post</button>
           </div>

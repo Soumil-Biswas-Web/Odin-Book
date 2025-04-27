@@ -9,6 +9,7 @@ import WriteComment from './components/WriteComment';
 export default function PostPage() {
 
   const post = useLoaderData();
+  console.log(post);
 
   return (
     <div className="">
@@ -24,13 +25,13 @@ export default function PostPage() {
 }
 
 PostPage.loader = async ({params}) => {
-  console.log(params);
+  // console.log(params);
   const{postId} = params;
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_REACT_SERVER_URL}/posts/post`, {params: {postId}}
     );
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } 
   catch (e) {

@@ -35,12 +35,12 @@ export default function Login() {
       const response = await axios.post(
         `${import.meta.env.VITE_REACT_SERVER_URL}/auth/login`, data
       );
-      const { token, username } = response.data;
+      const { token, username, id } = response.data;
       // console.log(token);
       localStorage.setItem('token', token);
       flash("Logged in successfully");
-      dispatch(setUser({ username, token }));
       // console.log(response.data.username);
+      dispatch(setUser({ username, id, token }));
       navigate("/home");
     } catch (e) {
       catchError(e);

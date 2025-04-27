@@ -50,6 +50,12 @@ route.get('/post', async (req, res) => {
             include: {
                 user: true,
                 image: true,
+                _count: {
+                    select: {
+                        likes: true,
+                        comments: true
+                    }
+                },                
                 comments: {
                     include: {
                         user: true, 

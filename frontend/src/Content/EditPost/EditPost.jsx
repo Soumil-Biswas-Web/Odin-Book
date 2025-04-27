@@ -143,7 +143,7 @@ EditPost.loader = async ({params}) => {
     const response = await axios.get(
       `${import.meta.env.VITE_REACT_SERVER_URL}/posts/post`, {params: {postId}}
     );
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   } 
   catch (e) {

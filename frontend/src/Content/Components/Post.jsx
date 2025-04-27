@@ -8,7 +8,7 @@ export default function Post({post}) {
     <div className="p-3 border-b-[1px] border-contrast-color-offset">
         <UserBit user={post.user} />
 
-        <Link className='ml-14' to={(`postPage/${post.id}`)}>
+        <Link className='ml-14' to={(`/home/postPage/${post.id}`)}>
           <p>{post.text}</p>
 
           {post.image && (

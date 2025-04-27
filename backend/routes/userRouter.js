@@ -11,7 +11,15 @@ const route = Router();
 route.get('/all', async (req, res) => {
 
     try {
-        const users = await prisma.obook_User.findMany();
+        const users = await prisma.obook_User.findMany({
+            select: {
+                id: true,
+                username: true,
+                profilePicture: true,
+                follows: true,
+                following: true,
+            }
+        });
 
         // console.log("users:");
         // console.log(users);
@@ -90,14 +98,26 @@ route.post('/follow', authenticateRequest, async (req, res) => {
 
 // fetch a particular profile/ user
 route.get('/profile', async (req, res) => {
-
-    const {id} = req.body
+    
+    console.log(req.query);
+    const {id} = req.query
 
     try {
         const user = await prisma.obook_User.findUnique({
             where: {id},
             include: {
-                posts: true,
+                posts: {
+                    include: {
+                        user: true,
+                        image: true,
+                        _count: {
+                            select: {
+                                likes: true,
+                                comments: true
+                            }
+                        }
+                    }
+                },
                 comments: true,
                 follows: true,
                 following: true,
