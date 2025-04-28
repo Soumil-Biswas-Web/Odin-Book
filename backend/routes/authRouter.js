@@ -25,6 +25,7 @@ route.get('/me', authenticateRequest, async (req, res) => {
       select: {
         id: true,
         username: true,
+        profilePicture: true,
       }
     })
 
@@ -52,10 +53,13 @@ route.post('/login', parseForm, async (req, res) => {
 
   try {
     const user = await prisma.obook_User.findUnique({
-      where: {username}
+      where: {username},
+      include: {
+        profilePicture: true,
+      }
     })
 
-    // console.log(user);
+    console.log(user);
 
     if (user === null) {
       return res.status(400).json({success: false, message:'User not found'});
@@ -96,7 +100,7 @@ route.post('/login', parseForm, async (req, res) => {
         maxAge: 3 * 24 * 60 * 60 * 1000   // 3 Days
     });
   
-    res.json({ token, username: authenticatedUser.username, id: authenticatedUser.id});
+    res.json({ token, username: authenticatedUser.username, id: authenticatedUser.id, profilePicture: user.profilePicture});
   } catch (error) {
     console.error('Error Logging in:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });;

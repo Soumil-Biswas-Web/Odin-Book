@@ -11,10 +11,11 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action) {
-            const { username, id, token } = action.payload || {};
+            const { username, id, token, profilePicture } = action.payload || {};
             state.username = username ?? null; // Default to null if undefined
             state.id = id ?? null; // Default to null if undefined
             state.token = token ?? null; // Default to null if undefined
+            state.profilePicture = profilePicture ?? null; // Default to null if undefined
         },
         clearUser(state) {
             state.username = null;

@@ -6,6 +6,7 @@ import catchError from '../../../assets/js/catchError';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { MdEdit } from "react-icons/md";
+import { initializeApp } from '../../../utils/initialize';
 
 const schema = yup
   .object({
@@ -25,7 +26,7 @@ export default function EditProfilePicture({profile}) {
   
   const token = localStorage.getItem('token'); 
   
-  const [filePreview, setFilePreview] = useState(profile?.profilePicture || "66f-1.jpg");
+  const [filePreview, setFilePreview] = useState(profile?.profilePicture.url || "66f-1.jpg");
 
   const [save, setSave] = useState(false);
 
@@ -43,7 +44,8 @@ export default function EditProfilePicture({profile}) {
       console.log(response.data);
       flash("Profile Edited successfully");
       setSave(false);
-      navigate(`profile/${profile.id}`)
+      navigate(`/home/profile/${profile.id}`)
+      initializeApp();
     } catch (e) {
       catchError(e);
     }

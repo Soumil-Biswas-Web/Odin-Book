@@ -1,4 +1,4 @@
-import { Router, text } from "express";
+import { Router } from "express";
 import upload from "../middleware/multerUploader.js";
 import prisma from "../middleware/prismaInit.js";
 import { uploadToCloudinary } from "../middleware/cloudinaryInit.js";
@@ -63,7 +63,15 @@ route.get('/post', async (req, res) => {
                 },                
                 comments: {
                     include: {
-                        user: true, 
+                        user: {
+                            select: selectUserInfo,
+                        },
+                        _count: {
+                            select: {
+                                likes: true,
+                                comments: true
+                            }
+                        }, 
                     }                    
                 }
             }

@@ -40,6 +40,7 @@ export default function EditPost() {
       formData.append('file', data.image); // 'file' is the key expected by your backend
       formData.append('text', data.postText);
       formData.append('userId', user.id);    
+      formData.append('postId', post.id);  
       const response = await axios.put(`${import.meta.env.VITE_REACT_SERVER_URL}/posts/editPost`, formData, {
         headers: { 
           Authorization: `Bearer ${token}`, 

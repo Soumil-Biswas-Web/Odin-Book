@@ -5,7 +5,7 @@ export default function UserBit({user}) {
   return (
     <Link 
       className='flex items-center gap-4'
-      to={`profile/${user.id}`}
+      to={`/home/profile/${user.id}`}
     >
         <img 
           className='w-10 image-style'

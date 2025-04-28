@@ -4,6 +4,7 @@ import prisma from "../middleware/prismaInit.js";
 import { uploadToCloudinary } from "../middleware/cloudinaryInit.js";
 import { authenticateRequest } from "../middleware/authMiddleware.js";
 import { TbUserEdit } from "react-icons/tb";
+import selectUserInfo from "../middleware/selectuserInfo.js";
 
 const route = Router();
 
@@ -12,13 +13,7 @@ route.get('/all', async (req, res) => {
 
     try {
         const users = await prisma.obook_User.findMany({
-            select: {
-                id: true,
-                username: true,
-                profilePicture: true,
-                follows: true,
-                following: true,
-            }
+            select: selectUserInfo,
         });
 
         // console.log("users:");
@@ -109,7 +104,9 @@ route.get('/profile', async (req, res) => {
                 profilePicture: true,
                 posts: {
                     include: {
-                        user: true,
+                        user: {
+                            select: selectUserInfo,
+                        },
                         image: true,
                         _count: {
                             select: {

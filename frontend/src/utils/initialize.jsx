@@ -15,10 +15,10 @@ export const initializeApp = async () => {
         },
       });
 
-      const {username, id} = response.data;
+      const {username, id, profilePicture} = response.data;
       // console.log("user: ", response.data);
       // Set user and token in Redux
-      store.dispatch(setUser({ username, id, token }));
+      store.dispatch(setUser({ username, id, token, profilePicture }));
     } catch (error) {
       console.error('Failed to fetch user:', error);
       // Clear invalid token

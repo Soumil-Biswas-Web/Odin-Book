@@ -5,6 +5,8 @@ import * as yup from "yup";
 import { useSelector } from 'react-redux';
 import catchError from '../../assets/js/catchError';
 import { Editor } from '@tinymce/tinymce-react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup
   .object({
@@ -26,7 +28,10 @@ export default function NewPost() {
   const [filePreview, setFilePreview] = useState(null);
 
   const token = localStorage.getItem('token');
+
   const user = useSelector((state) => state.userReducer);
+
+  const navigate = useNavigate()
 
   // Sends POST Request to backend API to make a new post
   const apiNewPost = async(data) => {
@@ -67,7 +72,6 @@ export default function NewPost() {
         <Controller
           name="postText"
           control={control}
-          defaultValue={localStorage.getItem("postText") || ""}
           render={({ field }) => (
             <textarea
               {...field}
