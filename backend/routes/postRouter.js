@@ -3,6 +3,7 @@ import upload from "../middleware/multerUploader.js";
 import prisma from "../middleware/prismaInit.js";
 import { uploadToCloudinary } from "../middleware/cloudinaryInit.js";
 import { authenticateRequest } from "../middleware/authMiddleware.js";
+import selectUserInfo from "../middleware/selectuserInfo.js";
 
 const route = Router();
 
@@ -11,7 +12,9 @@ route.get('/feed', async (req, res) => {
     try {
         const feed = await prisma.obook_Post.findMany({
             include: {
-                user: true,
+                user: {
+                    select: selectUserInfo,
+                },
                 image: true,
                 _count: {
                     select: {
@@ -48,7 +51,9 @@ route.get('/post', async (req, res) => {
                 id: postId
             },
             include: {
-                user: true,
+                user: {
+                    select: selectUserInfo,
+                },
                 image: true,
                 _count: {
                     select: {

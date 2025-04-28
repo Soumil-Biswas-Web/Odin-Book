@@ -106,6 +106,7 @@ route.get('/profile', async (req, res) => {
         const user = await prisma.obook_User.findUnique({
             where: {id},
             include: {
+                profilePicture: true,
                 posts: {
                     include: {
                         user: true,
@@ -137,6 +138,49 @@ route.get('/profile', async (req, res) => {
 
     } catch (error) {
       console.error('Error fetching user:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }   
+});
+
+route.post('/picture', authenticateRequest, upload.single('file'), async (req, res) => {
+    try {
+        // console.log(req);
+        const { username } = req.user;
+        const file = req.file;
+
+        // Upload file to Coudinary
+        const couldinaryResult = await uploadToCloudinary(file);
+        console.log(couldinaryResult);
+        
+        const result = await prisma.obook_User.update({
+            where: {username},
+            data: {
+                profilePicture: {
+                    upsert: {
+                        update: {
+                          name: couldinaryResult.original_filename,
+                          url: couldinaryResult.secure_url,
+                          size: couldinaryResult.bytes,
+                          publicId: couldinaryResult.public_id,
+                        },
+                        create: {
+                          name: couldinaryResult.original_filename,
+                          url: couldinaryResult.secure_url,
+                          size: couldinaryResult.bytes,
+                          publicId: couldinaryResult.public_id,
+                        },
+                    }
+                }
+            }
+        })
+
+        if (!result) {
+            return res.status(400).json({message: 'Profile not found'});
+        }
+
+        res.status(201).json({message:'Profile edited successfully'});
+    } catch (error) {
+      console.error('Error editing profile:', error);
       res.status(500).json({ message: 'Internal Server Error' });
     }   
 });

@@ -30,7 +30,7 @@ Feed.loader = async ()  => {
     const response = await axios.get(
       `${import.meta.env.VITE_REACT_SERVER_URL}/posts/feed`
     );
-    // console.log(response.data);
+    console.log(response.data);
     return response.data;
   } 
   catch (e) {

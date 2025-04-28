@@ -44,7 +44,8 @@ export const plugins = [
         'scrollbar-width': 'none'     /* Firefox */
       },
       '.button-style' : {/* Check index.css */},
-      '.fake-button-style' : {/* Check index.css */}
+      '.fake-button-style' : {/* Check index.css */},
+      '.image-style' : {/* Check index.css */},
     })
   })
 ];

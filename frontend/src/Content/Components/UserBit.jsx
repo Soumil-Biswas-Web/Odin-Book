@@ -8,8 +8,8 @@ export default function UserBit({user}) {
       to={`profile/${user.id}`}
     >
         <img 
-          className='w-10 border-2 border-contrast-color rounded-full'
-          src={user?.profilePicture || "logo-sb.png"} 
+          className='w-10 image-style'
+          src={user.profilePicture?.url || "66f-1.jpg"} 
           alt={user.username + "Pic"} 
         />
         <p className='font-bold'>{user.username}</p>
