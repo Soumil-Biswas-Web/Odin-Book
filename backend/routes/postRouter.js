@@ -21,7 +21,8 @@ route.get('/feed', async (req, res) => {
                         likes: true,
                         comments: true
                     }
-                }
+                },
+                likes: true,
             }
         });
 
@@ -60,7 +61,8 @@ route.get('/post', async (req, res) => {
                         likes: true,
                         comments: true
                     }
-                },                
+                },
+                likes: true,               
                 comments: {
                     include: {
                         user: {
@@ -71,7 +73,8 @@ route.get('/post', async (req, res) => {
                                 likes: true,
                                 comments: true
                             }
-                        }, 
+                        },
+                        likes: true,
                     }                    
                 }
             }
@@ -218,10 +221,37 @@ route.post('/comment', authenticateRequest, upload.none(), async (req, res) => {
 
         res.status(201).json({message:'Comment added successfully'});
     } catch (error) {
-      console.error('Error deleting post:', error);
+      console.error('Error commenting on post:', error);
       res.status(500).json({ message: 'Internal Server Error' });
     }   
 })
 
+// Add Like to post
+route.post('/like', authenticateRequest, upload.none(), async (req, res) => {
+    try {
+        const {id} = req.user;
+        const {postId} = req.body;
+
+        const result = await prisma.obook_Post.update({
+            where: {id: postId},
+            data: {
+                likes: {
+                    create: {
+                        userId: id,
+                    }
+                },
+            }
+        });
+
+        if (!result) {
+            return res.status(400).json({message: 'Post not found'});
+        }        
+
+        res.status(201).json({message:'Comment added successfully'});
+    } catch (error) {
+      console.error('Error Liking post:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }   
+})
 
 export default route;

@@ -132,7 +132,7 @@ export default function NewPost() {
 
       </div>
       <button className='button-style' type='submit' >Post</button>
-      <Editor
+      {/* <Editor
         apiKey='8nuck7966nokqwao4rzzpdks2us5ylqgzp3z1lpxxg54w421'
         init={{
           plugins: [
@@ -150,7 +150,7 @@ export default function NewPost() {
           content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')          
         }}
         initialValue="Welcome to TinyMCE!"
-      />      
+      />*/}
     </form>
   )
 }

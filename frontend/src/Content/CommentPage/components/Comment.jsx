@@ -9,7 +9,7 @@ export default function Comment({comment}) {
         <UserBit user={comment.user}/>
         <p>{comment.text}</p>
 
-        <PostNumbserSection item={comment}/>
+        {/* <PostNumbserSection item={comment}/> */}
     </div>
   )
 }
