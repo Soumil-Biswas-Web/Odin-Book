@@ -1,5 +1,6 @@
 import React from 'react'
-import Followsection from './Followsection';
+import Users from './Users';
+import { Link } from 'react-router-dom';
 
 export default function RightSide() {
   return (
@@ -15,7 +16,10 @@ export default function RightSide() {
                 <img className="magic-border" src="/1m06z4.jpg" alt="you_cant_if_you_dont.jpg" />
             </div>
 
-            <Followsection/>
+            <p className='text-lg'>People you might know</p>
+            <Users side={true}/>
+
+            <Link className='button-style self-start' to={'/home/users'}>Show All</Link>
         </div>  
     </div>
   )

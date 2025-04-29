@@ -18,7 +18,7 @@ import SignUp from "./Content/Login/SignUp";
 import EditPost from "./Content/EditPost/EditPost";
 import PostPage from "./Content/CommentPage/PostPage";
 import Profile from "./Content/Profile/Profile";
-import Followsection from "./Content/Header/components/Followsection";
+import Users from "./Content/Header/components/Users";
 
 window.flash = (message, type = "success") =>
     Bus.emit("flash", { message, type });
@@ -27,8 +27,9 @@ export const router = createHashRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />} errorElement={<Error />}>
             <Route index element={<Navigate to={"/home"} />} />
-            <Route path="home" loader={Followsection.loader} element={<Header />}>
+            <Route path="home" loader={Users.loader} element={<Header />}>
                 <Route index loader={Feed.loader} element={<Feed />} />
+                <Route path="users" loader={Users.loader} element={<Users/>}/>
                 <Route path="newPost" element={<NewPost />} />
                 <Route path="editPost/:postId" loader={EditPost.loader} element={<EditPost />} />
                 <Route path="postPage/:postId" loader={PostPage.loader} element={<PostPage />} />
