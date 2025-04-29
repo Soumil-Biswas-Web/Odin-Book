@@ -44,6 +44,7 @@ export default function PostNumbserSection({item}) {
       // console.log(response.data);
       flash("Post Liked successfully");
       // refresh window or smth
+      navigate(0);
     } catch (e) {
       catchError(e);
     }
