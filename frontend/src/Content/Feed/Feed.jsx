@@ -14,9 +14,9 @@ export default function Feed() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (posts == undefined) navigate(0);    
-  // }, [])
+  useEffect(() => {
+    if (posts == undefined) navigate(0);    
+  }, [])
 
   if (posts == undefined) {    
     return (
