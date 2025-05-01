@@ -22,7 +22,7 @@ export default function Header() {
                 {/* Outlet */}
                 <div className="magic-center w-full shrink-0 md:w-[500px] sm:border-x-2 border-contrast-color">
                     <MobileHeader/>
-                    <div className='hidden md:flex justify-between w-full border-b-2 border-contrast-color p-3'>
+                    <div className='hidden lg:flex justify-between w-full border-b-2 border-contrast-color p-3'>
                         {(user.username === null)
                             ? <Link to="/login" className='font-semibold'>Login</Link>
                             : <Link className='font-bold'>{user.username}</Link>
