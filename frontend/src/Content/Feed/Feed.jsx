@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Post from '../Components/Post';
 import feedData from '../../assets/js/feedData';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import catchError from '../../assets/js/catchError';
 import DropDown from './components/DropDown';
@@ -10,6 +10,19 @@ export default function Feed() {
 
   // const posts = feedData;
   const posts = useLoaderData();
+  // console.log("posts:", posts);
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (posts == undefined) navigate(0);    
+  // }, [])
+
+  if (posts == undefined) {    
+    return (
+      <div className='magic-center justify-center h-full'>No Posts Fetched</div>
+    );
+  }
 
   return (
     <div className=''>

@@ -8,10 +8,12 @@ import UserBit from '../../Components/UserBit';
 
 export default function Users({side}) {
     
-    const data = useLoaderData();
-    // console.log(data);
+  const data = useLoaderData();
+  // console.log(data);
 
-    const user = useSelector((state) => state.userReducer);
+  const user = useSelector((state) => state.userReducer);
+
+  if (data == undefined) return (<div>No user fetched</div>)
 
   return (
     <div className="flex flex-col gap-5">
