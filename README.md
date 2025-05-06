@@ -4,6 +4,12 @@ A basic social media clone for users to View, Comment, Post and Follow others' p
 This website uses a custom built Restful API to fetch site data.
 Created Using React.js for the Front End and Node.js and express for the Backend.
 
+Certain Profile Images credited to Digital Extremes and [Warframe](https://wiki.warframe.com/w/Kinemantik_Instant_Messenger)
+
+## Stack
+
+[![My Skills](https://skillicons.dev/icons?i=html,css,javascript,react,tailwindcss,vite,nodejs,express,postgres,postman,figma)](https://skillicons.dev)
+
 ## Getting Started
 
 Fork this repository [by following this guide.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
